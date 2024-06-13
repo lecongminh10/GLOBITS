@@ -2,98 +2,63 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RoleRequest;
 use App\Models\Role;
+use App\Services\RoleService;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+
+    protected $roleService;
+
+    public function __construct(RoleService $roleService)
     {
-        $roles = Role::paginate(10);
+        $this ->roleService = $roleService;
+
+    }
+    public function index(Request $request)
+    {
+        $perPage = $request->get('per_page', 10); // Số lượng item mỗi trang, mặc định là 10
+        $roles = $this->roleService->paginate($perPage);
         return view('roles.index', compact('roles'));
     }
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         return view('roles.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(RoleRequest $request)
     {
 
-        $validateData= $request->validate([
-                'role'                  => 'required|string|max:255',
-                'description'           => 'nullable|string',
-            ],
-            [
-                'role.required'         => 'The role field is required.',
-                'role.max'              => 'The role may not be greater than 255 characters.',
-               
-            ]
-        );
+        $data = $request ->all();
 
-            $role = new Role;
-
-            $role ->role=$validateData['role'];
-            $role ->description= $validateData['description'];
-
-            $role ->save();
-   
+        $this ->roleService ->createRole($data);
 
     return redirect()->route('role.index')->with('success', 'Role created successfully.');
 
     }
 
-    /**
-     * Display the specified resource.
-     */
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
-        $role = Role::findOrFail($id);
+       $role= $this ->roleService ->getById($id);
         return view('roles.edit' , ['role' =>$role]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(RoleRequest $request, string $id)
     {
-        $role = Role::findOrFail($id);
-        $validateData= $request->validate([
-            'role'               => 'required|string|max:255',
-            'description'        => 'nullable|string',
-        ],[
-            'role.required'      => 'The role field is required.',
-            'role.max'           => 'The role may not be greater than 255 characters.',
-           
-        ]
-    );
-        $role ->update([
-            'role'               =>$validateData['role'],
-            'description'        =>$validateData['description']
-        ]);
+
+        $data = $request ->all();
+
+        $this ->roleService->updateRole($id , $data);
+
         return redirect()->route('role.index')->with('success', 'Role update successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        $role = Role::findOrFail($id);
-        $role ->delete();
+        $this ->roleService->delete($id);
         return redirect()->route('role.index')->with('success', 'Role delete successfully.');
     }
 }

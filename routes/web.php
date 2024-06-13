@@ -31,7 +31,7 @@ Route::prefix('country')->group(function(){
     Route::get('/create' , [CountryController::class , 'create']) ->name('country.create');
     Route::post('/store' , [CountryController::class , 'store'])->name('country.store');
     Route::get('/{country}' , [CountryController::class, 'edit'])->name('country.edit');
-    Route::post('/{country}/update' , [CountryController::class, 'update'])->name('country.update');
+    Route::put('/{country}/update' , [CountryController::class, 'update'])->name('country.update');
     Route::delete('/{country}/destroy' , [CountryController::class , 'destroy'])->name('country.destroy');
 });
 

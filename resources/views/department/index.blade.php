@@ -11,55 +11,25 @@
 
 @endsection
 @section('content')
-    {{-- <div class="row">
-    
-    <h3 class="text-center">{{$nameCompany}} - List - Department </h3>
-    
-    <a href="/company/{{$companyId}}/department/create" class="col-1 my-3 btn bg-primary text-white"><i class="bi bi-patch-plus"></i> Add</a>
-</div>
-<table class="table table-hover table-striped">
-    <thead>
-        <tr>
-            <th>STT</th>
-            <th>Code</th>
-            <th>Name</th>
-            <th>Parent_Id</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($departments as $department)
-        <tr>
-            <td>{{ $department->id }}</td>
-            <td>{{ $department->code }}</td>
-            <td>{{ $department->name }}</td>
-            <td>
-                @if ($department->parent)
-                    {{ $department->parent->name }}
-                @endif
-            </td>
 
-            <td>
-                <a href="/company/{{$companyId}}/department/{{ $department->id }}" class="btn btn-primary"><i class="bi bi-pencil"></i></a>
-                <form action="/company/{{ $companyId }}/department/{{ $department->id }}/destroy" method="POST" class="d-inline">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có muốn xóa không')"><i class="bi bi-trash"></i></button>
-                </form>
-                
-            </td>
-        </tr>
-        @endforeach
-    </tbody>
-</table> --}}
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
                     <h3 class="text-center">List-Department</h3>
                     <h4 class="card-title mb-0">Company : {{ $nameCompany }}</h4>
-                </div><!-- end card header -->
-
+                </div>
+                @if (Session::has('success'))
+                <div class="alert alert-success">
+                    {{ Session::get('success') }}
+                </div>
+                @endif
+                @if (Session::has('error'))
+                <div class="alert alert-danger">
+                    {{ Session::get('error') }}
+                </div>
+                @endif
+            
                 <div class="card-body">
                     <div class="listjs-table" id="customerList">
                         <div class="row g-4 mb-3">
@@ -127,9 +97,11 @@
                                         </tr>
                                         <!-- Duyệt qua các phòng ban con -->
                                         @php
-                                            $parentsChild = \App\Models\Department::getAllDepartment_ID(
-                                                $department->id,
-                                            );
+                                            // $parentsChild = \App\Models\Department::getAllDepartment_ID(
+                                            //     $department->id,
+                                            // );
+                                         
+                                            $parentsChild = $departmentService->getAllDepartment_ID($department->id);
                                         @endphp
                                         @foreach ($parentsChild as $child)
                                             <tr class="child-of-{{ $department->id }} department-row bg-light "

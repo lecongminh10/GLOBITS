@@ -35,22 +35,10 @@
                         <div class="table-responsive table-card mt-3 mb-1">
                             <table class="table align-middle table-nowrap" id="customerTable">
 
-
-                                {{-- <thead class="table-light">
-                                    <tr>
-                                        <th>STT</th>
-                                        <th>Code</th>
-                                        <th>Name</th>
-                                        <th>Description</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead> --}}
-
                                 @include('components.atoms.table_head', [
                                     'idClassThead' => 'table-light',
                                     'headers' => ['STT', 'Code', 'Name', 'Description', 'Action'],
                                 ])
-
 
                                 <tbody class="list form-check-all">
                                     @foreach ($countries as $country)
@@ -60,8 +48,8 @@
                                             <td>{{ $country->name }}</td>
                                             <td>{{ $country->description }}</td>
                                             <td>
-                                                <button onclick="editCountry({{ $country->id }})"
-                                                    class="btn btn-primary "data-bs-toggle="modal" id="create-btn"
+                                                <button
+                                                    class="btn btn-primary" data-bs-toggle="modal" id="create-btn" data-id="{{$country ->id}}"
                                                     data-bs-target="#showModalEdit"><i class="ri-edit-2-line"></i> </button>
                                                 <form action="{{ route('country.destroy', $country->id) }}" method="POST"
                                                     class="d-inline">
@@ -78,14 +66,6 @@
                                 </tbody>
                             </table>
 
-
-                            {{-- <x-molecules.table classTable="table align-middle table-nowrap" idTable="customerTable" :headers="['STT', 'Code', 'Name', 'Description', 'Action']"/> --}}
-
-
-
-
-
-
                             <div class="noresult" style="display: none">
                                 <div class="text-center">
                                     <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop"
@@ -97,60 +77,71 @@
                                 </div>
                             </div>
                         </div>
-
-
-
-                        {{-- @if ($countries->count() > 0)
-                            <div class="mt-4">
-                                <nav aria-label="Page navigation">
-                                    <ul class="pagination justify-content-center">
-                                        <li class="page-item {{ $countries->onFirstPage() ? 'disabled' : '' }}">
-                                            <a class="page-link" href="{{ $countries->previousPageUrl() }}"
-                                                aria-label="Previous">
-                                                Pre</span>
-                                            </a>
-                                        </li>
-
-                                        {{ $countries->links('pagination::bootstrap-4') }}
-
-                                        <li class="page-item {{ !$countries->hasMorePages() ? 'disabled' : '' }}">
-                                            <a class="page-link" href="{{ $countries->nextPageUrl() }}" aria-label="Next">
-                                                <span aria-hidden="true">Next</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        @endif --}}
                         @include('components.molecules.pagination', ['paginator' => $countries])
-
-
                     </div>
-                </div><!-- end card -->
-            </div>
-            <!-- end col -->
+                </div>
+            </div>    
         </div>
-        <!-- end col -->
     </div>
     @include('country.create')
     @include('country.edit')
 @endsection
 @section('scripts')
-    <script>
-        var countries = {!! json_encode($countries) !!};
-        const editCountry = function(idCountry) {
+<script>
+    var countries = {!! json_encode($countries) !!};
+    var myModalEl = document.getElementById('showModalEdit');
+    var code = document.querySelector('#code_up');
+    var name_up = document.querySelector('#name_up');
+    var description = document.querySelector('#description_up');
 
-            const country = countries.data.find(country => country.id == idCountry);
-            console.log(country)
-            if (country) {
-                $('#edit-country').attr('action', '/country/' + idCountry + '/update')
-                $('#code').val(country.code);
-                $('#name').val(country.name);
-                $('#description').val(country.description);
-            } else {
-                console.error('Category not found');
-            }
-
+    myModalEl.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget;
+        var idCountry = button.getAttribute('data-id');
+        const country = countries.data.find(country => country.id == idCountry);
+        
+        console.log(country);
+        
+        if (country) {
+            $('#edit-country').attr('action', '/country/' + idCountry + '/update');
+            code.value = country.code;
+            name_up.value = country.name;
+            description.value = country.description;
         }
-    </script>
+    });
+
+    document.getElementById('edit-country').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        var formData = {
+            _token: $('meta[name="csrf-token"]').attr('content'), 
+            _method: 'PUT',
+            code: code.value,
+            name: name_up.value,
+            description: description.value
+        };
+
+        var idCountry = $('#edit-country').attr('action').split('/').slice(-2, -1)[0];
+
+        $.ajax({
+            url: '/country/' + idCountry + '/update',
+            type: 'POST', // Change to POST
+            data: formData,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                console.log('Success:', response);
+                $('#showModalEdit').one('hidden.bs.modal', function (e) {
+                    alert("Bạn đã sửa thành công ");
+                    location.reload();
+                }).modal('hide');
+            },
+
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+            }
+        });
+    });
+</script>
+
 @endsection

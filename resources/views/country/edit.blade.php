@@ -1,48 +1,4 @@
-{{-- @extends('layouts.app')
-@section('title')
-    Update- Country
-@endsection
-@section('content')
-    <div class="row">
-        <h3 class="text-center my-3">Update-Country</h3>
-        <a href="{{route('country.index')}}" class="col-1 my-3 btn text-black "><i class="bi bi-arrow-left-circle-fill"></i></a>
-    </div>
-    <div class="row justify-content-center">
-        @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-        @endif
-        <div class="col-md-6">
-          <form action="/country/{{$country ->id}}/update" method="POST">
-            @csrf
-            
-            <div class="mb-3">
-              <label for="code" class="form-label">Code</label>
-              <input type="text" class="form-control" id="code" name="code" value="{{$country ->code}}">
-            </div>
-            
-          
-            <div class="mb-3">
-              <label for="name" class="form-label">Name</label>
-              <input type="text" class="form-control" id="name" name="name" value="{{$country ->name}}">
-            </div>
-  
-         
-            <div class="mb-3">
-              <label for="description" class="form-label">Description</label>
-              <textarea class="form-control" id="description" name="description" rows="3">{{$country ->description}}</textarea>
-            </div>
-  
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
-        </div>
-      </div>
-@endsection --}}
+
 <div class="modal fade" id="showModalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -61,29 +17,30 @@
           @endif
           <form class="tablelist-form" method="POST" autocomplete="off" id="edit-country">
               @csrf
+              @method('PUT')
               <div class="modal-body">
-                  {{-- <div class="mb-3" id="modal-id">
-                      <label for="id-field" class="form-label">Code</label>
-                      <input type="text" id="code" class="form-control" placeholder="Code"  name="code"/>
-                  </div> --}}
-                  <x-molecules.text_input_field :name="'code'" :label="'Code'" :classlabel="'form-label'"
-                  :classinput="'form-control'" :value="$country->code"/>
+  
+                  <x-molecules.text_input_field :name="'code_up'" :label="'Code'" :classlabel="'form-label'" 
+                  :classinput="'form-control'" />
 
-                  {{-- <div class="mb-3">
-                      <label for="customername-field" class="form-label"> Name</label>
-                      <input type="text" id="name" class="form-control" placeholder=" Name"  name="name"/>
-                      
-                  </div> --}}
-                  <x-molecules.text_input_field :name="'name'" :label="'Name'" :classlabel="'form-label'"
-                  :classinput="'form-control'" :value="$country->name"/>
+                  <x-molecules.text_input_field :name="'name_up'" :label="'Name'" :classlabel="'form-label'" 
+                  :classinput="'form-control'" />
 
-                  {{-- <div class="mb-3">
-                      <label for="" class="form-label">Description</label>
-                      <input type="text" id="description" class="form-control" placeholder="Enter description" name="description"/>
-                      
+                  <x-molecules.text_input_field :name="'description_up'" :label="'Description'" :classlabel="'form-label'" 
+                  :classinput="'form-control'" />
+                  
+                  {{-- <div class="form-group mb-3">
+                    <label for="code" >Code</label>
+                    <input type="text" class="form-controll" id="code">
+                  </div>
+                  <div class="form-group mb-3">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-controll" id="name">
+                  </div>
+                  <div class="form-group mb-3">
+                    <label for="description">Description</label>
+                    <input type="text" class="form-controll" id="description">
                   </div> --}}
-                  <x-molecules.text_input_field :name="'description'" :label="'Description'" :classlabel="'form-label'"
-                  :classinput="'form-control'" :value="$country->description"/>
               </div>
               <div class="modal-footer">
                   <div class="hstack gap-2 justify-content-end">

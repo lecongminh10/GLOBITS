@@ -15,12 +15,7 @@
                 <div class="card-body">
                     <form action="/person/{{$person->id}}/update" method="POST">
                         @csrf
-                        
-                        {{-- <div class="mb-3">
-                          <label for="code" class="form-label">Full Name</label>
-                          <input type="text" class="form-control" id="code" name="full_name" value="{{$person ->full_name}}">
-                        </div> --}}
-                        
+
                         <x-molecules.text_input_field :name="'full_name'" :label="'Full Name'" :classlabel="'form-label'"
                         :classinput="'form-control'" :value="$person ->full_name"/>
 
@@ -33,28 +28,11 @@
                             </select>
                         </div>
                         
-              
-                     
-                        {{-- <div class="mb-3">
-                          <label for="date" class="form-label">Birth Date</label>
-                          <input type="date" class="form-control" id="password" name="birthdate" value="{{$person ->birthdate}}">
-                        </div> --}}
-
                         <x-molecules.date_picker_fied :classlabel="'form-label'" :name="'birthdate'" :label="'Birth Date:'"
                         :class="'form-control'" :value="$person ->birthdate"/>
             
-                        {{-- <div class="mb-3">
-                            <label for="" class="form-label">Phone Number</label>
-                            <input type="text" class=" form-control " name="phone_number" value="{{$person ->phone_number}}">
-                        </div> --}}
-
                         <x-molecules.text_input_field :name="'phone_number'" :label="'Phone Number'" :classlabel="'form-label'"
                         :classinput="'form-control'" :value="$person ->phone_number"/>
-
-                        {{-- <div class="mb-3">
-                            <label for="" class="form-label">Adders</label>
-                            <input type="text" class=" form-control " name="address" value="{{$person ->address}}">
-                        </div> --}}
 
                         <x-molecules.text_input_field :name="'address'" :label="'Adders'" :classlabel="'form-label'"
                         :classinput="'form-control'" :value="$person ->address"/>

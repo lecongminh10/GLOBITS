@@ -51,10 +51,10 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public static function getID_Name(){
-        $users = User::select('id', 'name')->get();
-        return $users;
-    }
+    // public static function getID_Name(){
+    //     $users = User::select('id', 'name')->get();
+    //     return $users;
+    // }
     public function roles()
     {
         return $this->belongsToMany(Role::class);

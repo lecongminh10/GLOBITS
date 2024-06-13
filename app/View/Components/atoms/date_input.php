@@ -1,26 +1,27 @@
 <?php
 
-namespace App\View\Components\atoms;
+namespace App\View\Components;
 
-use Closure;
-use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class date_input extends Component
+class DateInput extends Component
 {
-    /**
-     * Create a new component instance.
-     */
-    public function __construct()
+    public $id;
+    public $name;
+    public $class;
+    public $value;
+
+    public function __construct($id, $name, $class = '', $value = '')
     {
-        //
+        $this->id = $id;
+        $this->name = $name;
+        $this->class = $class;
+        $this->value = $value;
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     */
-    public function render(): View|Closure|string
+    public function render()
     {
-        return view('components.atoms.date_input');
+        return view('components.atoms.date-input');
     }
 }
+

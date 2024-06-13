@@ -14,17 +14,15 @@ class select_field extends Component
     public $options;
     public $multiple;
 
-    /**
-     * Create a new component instance.
-     *
-     * @param  array  $options
-     * @param  bool  $multiple
-     * @return void
-     */
-    public function __construct($options, $multiple = false)
+    public $field;
+
+ 
+    public function __construct($options, $multiple , $field )
     {
         $this->options = $options;
         $this->multiple = $multiple;
+        $this->field = $field;
+  
     }
 
     public function render(): View|Closure|string

@@ -16,8 +16,9 @@ class Company extends Model
         'name',
         'address',
     ];
-    public static function getID_Name(){
-        $company = Company::select('id', 'name')->get();
-        return $company;
+
+    public function persons()
+    {
+        return $this->hasMany(Person::class);
     }
 }

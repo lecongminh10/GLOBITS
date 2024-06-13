@@ -4,81 +4,63 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CompanyRequest;
 use App\Models\Company;
+use App\Services\CompanyService;
+use App\Services\DepartmentService;
+use App\Services\ProjectService;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+
+    protected $companyService;
+    protected $departmentService;
+    
+    protected $projectService;
+    public function __construct(CompanyService $companyService , DepartmentService $departmentService , ProjectService $projectService)
     {
-        $companies = Company::paginate(10);
-        return view('company.index', compact('companies'));
+        $this->companyService = $companyService;
+        $this->departmentService= $departmentService;
+        $this ->projectService = $projectService;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    public function index(Request $request)
+    {
+        $perPage = $request->get('per_page', 10); 
+        $companies = $this->companyService->paginate($perPage);
+        return view('company.index', compact('companies'));
+    }
     public function create()
     {
         return view('company.create');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(CompanyRequest $request)
     {
-        
-        $validatedData = $request->validated();
-
-       
-        $company = new Company();
-        $company->code = $validatedData['code'];
-        $company->name = $validatedData['name'];
-        $company->address = $validatedData['address'];
-        $company->save();
-
-       
+        $data = $request->only(['code', 'name', 'address']);
+        $this->companyService->createCompany($data);
         return redirect()->route('company.index')->with('success', 'Company created successfully.');
     }
-
-    /**
-     * Display the specified resource.
-     */
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
-        $company= Company::findOrFail($id);
-        return view('company.edit' , ['company' =>$company]);
+        $company = $this->companyService->getById($id);
+        return view('company.edit', ['company' => $company]);
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(CompanyRequest $request, string $id)
     {
-        $company= Company::findOrFail($id);
-      
-        $company ->update([
-           'code'    =>  $request ->code,
-           'name'    =>  $request ->name,
-           'address' =>  $request ->address,
-        ]);
+        $data = $request->only(['code', 'name', 'address']);
+        $this->companyService->updateCompany($id, $data);
         return redirect()->route('company.index')->with('success', 'Company updated successfully.');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        $company= Company::findOrFail($id);
-        $company ->delete();
+
+        $childDepartmentsCount = $this->departmentService->getChildDepartmentsCount($id);
+
+        $childProjectCount = $this->projectService-> Company_getChildProjectCount($id);
+    
+        if ($childDepartmentsCount > 0 || $childProjectCount >0) {
+            return redirect()->route('company.index')->with('error', 'Cannot delete company because it has department or project.');
+        }
+        $this->companyService->delete($id);
         return redirect()->route('company.index')->with('success', 'Company delete successfully.');
     }
 }

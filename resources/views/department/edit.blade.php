@@ -21,18 +21,10 @@
                 <form action="{{ route('company.department.update', ['company' => $companyId, 'department' => $department->id]) }}" method="POST">
         
                     @csrf
-                    {{-- <div class="mb-3">
-                        <label for="code" class="form-label">Code</label>
-                        <input type="text" class="form-control" id="code" name="code"  value="{{$department ->code}}">
-                    </div> --}}
 
                     <x-molecules.text_input_field :name="'code'" :label="'Code'" :classlabel="'form-label'"
                     :classinput="'form-control'" :value="$department ->code"/>
-        
-                    {{-- <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" name="name"  value="{{$department ->name}}">
-                    </div> --}}
+      
                     <x-molecules.text_input_field :name="'name'" :label="'Name'" :classlabel="'form-label'"
                     :classinput="'form-control'" :value="$department ->name"/>
 

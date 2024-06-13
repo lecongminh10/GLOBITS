@@ -23,14 +23,5 @@ class Task extends Model
         'status'
     ];
 
-    public static function getAll(){
-        $tasks = DB::table('tasks')
-                    ->join('persons' , 'tasks.person_id' ,'=','persons.id')
-                    ->join('projects' , 'tasks.project_id', '=','projects.id')
-                    ->select('tasks.*' , 'persons.full_name as t_s_fullname', 'projects.name as t_p_name')
-                    ->orderBy('tasks.id' , 'desc')
-                    ->get();
 
-        return $tasks;
-    }
 }

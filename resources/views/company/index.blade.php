@@ -3,48 +3,24 @@
 @section('title', 'List - Company')
 
 @section('content')
-    {{-- <div class="row">
-    <h3 class="text-center">List - Company</h3>
-    <a href="{{ route('company.create') }}" class="col-1 my-3 btn bg-primary text-white"><i class="bi bi-patch-plus"></i> Add</a>
-</div>
-<table class="table table-hover table-striped">
-    <thead>
-        <tr>
-            <th>STT</th>
-            <th>Code</th>
-            <th>Name</th>
-            <th>Address</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($companies as $company)
-        <tr>
-            <td>{{ $company->id }}</td>
-            <td>{{ $company->code }}</td>
-            <td>{{ $company->name }}</td>
-            <td>{{ $company->address }}</td>
-          
-            <td>
-                <a href="{{ route('company.edit', $company->id) }}" class="btn btn-primary"><i class="bi bi-pencil"></i></a>
-                <form action="{{ route('company.destroy', $company->id) }}" method="POST" class="d-inline">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có muốn xóa không')"><i class="bi bi-trash"></i></button>
-                </form>
-            </td>
-        </tr>
-        @endforeach
-    </tbody>
-</table> --}}
+
 
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title mb-0">List - Company</h4>
-                </div><!-- end card header -->
-
+                </div>
+                @if (Session::has('success'))
+                <div class="alert alert-success">
+                    {{ Session::get('success') }}
+                </div>
+                @endif
+                @if (Session::has('error'))
+                <div class="alert alert-danger">
+                    {{ Session::get('error') }}
+                </div>
+                @endif
                 <div class="card-body">
                     <div class="listjs-table" id="customerList">
                         <div class="row g-4 mb-3">

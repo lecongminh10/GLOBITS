@@ -1,4 +1,4 @@
-
-@include('atoms.label', ['for' => $name, 'text' => $label])
-
-@include('atoms.text_area', ['id' => $name, 'name' => $name, 'rows' => $rows ?? 4, 'cols' => $cols ?? 50, 'value' => $value ?? ''])
+<div class=" form-group mb-3">
+    <x-atoms.label :for="$name" :text="$lable" />
+    <x-atoms.text_area :id="$name" :name="$name" :row="$row ?? 4" :cols="$cols ?? 50" :value="$value ?? ''" />
+</div>

@@ -8,17 +8,17 @@ use Illuminate\View\Component;
 
 class text_input extends Component
 {
-    /**
-     * Create a new component instance.
-     */
+
     public $name;
     public $value;
+    public $classinput;
 
-    public function __construct($name , $value)
+    public function __construct($name , $value , $classinput)
     {
         //
         $this ->name = $name;
         $this ->value = $value;
+        $this ->classinput= $classinput;
     }
 
     /**
@@ -26,9 +26,12 @@ class text_input extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.atoms.text_input', [
-           'name' => $this ->name ,
-           'value'=> $this ->value 
-        ]);
+        return view('components.atoms.text_input',
+        [
+            'name' =>$this ->name,
+            'value' =>$this ->value,
+            'classinput' =>$this ->classinput,
+        ]
+    );
     }
 }

@@ -17,24 +17,13 @@ class Person extends Model
         'birthdate',
         'phone_number',
         'address',
-        'user_id'
+        'user_id',
+        'company_id'
     ];
     public function projects()
     {
         return $this->belongsToMany(Project::class, 'project_person');
     }
-
-    // public function getAll(){
-    //     $person = DB::table('persons')
-    //     ->join('users' , 'persons.user_id' , '=','users.id')
-    //     ->join('companies','persons.company_id','=' ,'companies.id')
-    //     ->select('persons.*', 'users.name as user_name', 'companies.name as company_name')
-
-    //     ->orderBy('persons.id' , 'desc')
-    //     ->get();
-
-    //     return $person;
-    // }
     public function company()
     {
         return $this->belongsTo(Company::class);
@@ -43,9 +32,9 @@ class Person extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public static function getAll()
-    {
-        return self::with('user', 'company')->orderBy('id', 'desc')->get();
-    }
+    // public static function getAll()
+    // {
+    //     return self::with('user', 'company')->orderBy('id', 'desc')->get();
+    // }
 
 }

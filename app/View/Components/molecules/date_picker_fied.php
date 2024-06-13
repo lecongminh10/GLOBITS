@@ -1,33 +1,31 @@
 <?php
 
-namespace App\View\Components\molecules;
+namespace App\View\Components;
 
-use Closure;
-use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class date_picker_fied extends Component
+class DatePickerField extends Component
 {
-    /**
-     * Create a new component instance.
-     */
+    public $for;
     public $name;
     public $label;
+    public $classlabel;
     public $class;
-    public function __construct($name,$class ,$label)
+    public $value;
 
+    public function __construct($for, $name, $label, $classlabel = '', $class = '', $value = '')
     {
-        $this ->name = $name;
-        $this ->label= $label;
-        $this ->class= $class;
-        //
+        $this->for = $for;
+        $this->name = $name;
+        $this->label = $label;
+        $this->classlabel = $classlabel;
+        $this->class = $class;
+        $this->value = $value;
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     */
-    public function render(): View|Closure|string
+    public function render()
     {
-        return view('components.molecules.date_picker_fied',['name'=>$this->name , 'label'=>$this->label,'class'=>$this->class]);
+        return view('components.molecules.date_picker_fied');
     }
 }
+

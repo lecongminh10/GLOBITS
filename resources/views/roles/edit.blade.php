@@ -1,39 +1,3 @@
-{{-- @extends('layouts.app')
-
-@section('title', 'Edit Role')
-
-@section('content')
-    <div class="row">
-        <h3 class="text-center">Edit Role</h3>
-    </div>
-    <div class="row">
-        <div class="col-md-6 offset-md-3">
-            @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-            @endif
-            <form action="{{ route('role.update' , $role->id) }}" method="POST">
-                @csrf
-                <div class="mb-3">
-                    <label for="role" class="form-label">Role</label>
-                    <input type="text" class="form-control" id="role" name="role"  value="{{$role ->role}}">
-                </div>
-                <div class="mb-3">
-                    <label for="description" class="form-label">Description</label>
-                    <input class="form-control" id="description" name="description" type="text" value="{{$role ->description}}">
-                </div>
-                <button type="submit" class="btn btn-primary">Update</button>
-                <a href="{{ route('role.index') }}" class="btn btn-secondary">Cancel</a>
-            </form>
-        </div>
-    </div>
-@endsection --}}
-
 
 <div class="modal fade" id="showModalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">

@@ -6,28 +6,28 @@
     <div class="row justify-content-center ">
         <div class="col-md-7 ">
             <div class="card">
-                {{-- <h3 class="text-center my-2">Edit-Task</h3> --}}
-                <x-atoms.title :title="'Edit-Task'" class="text-center my-2" />
+                <x-atoms.title 
+                :title="'Edit-Task'" class="text-center my-2" />
                 <div class="card-header align-items-center">
                     @include('components.atoms.alert')
                 </div>
                 <div class="card-body">
                     <form method="POST" action="/task/{{ $task->id }}/update">
                         @csrf
-                        {{-- <div class="form-group mb-3">
-                            <label for="name">Name:</label>
-                            <input type="text" name="name" id="name" class="form-control"
-                                value="{{ $task->name }}">
-                        </div> --}}
-                        <x-molecules.text_input_field :name="'name'" :label="'Name'" :classlabel="'form-label'"
-                            :classinput="'form-control'" :value="$task->name" />
-                        {{-- <div class="form-group mb-3">
-                            <label for="description">Description:</label>
-                            <textarea name="description" id="description" class="form-control" rows="2">{{ $task->description }}</textarea>
-                        </div> --}}
 
-                        <x-molecules.text_input_field :name="'description'" :label="'Description:'" :classlabel="'form-label'"
-                            :value="$task->description" :classinput="'form-control'" />
+                        <x-molecules.text_input_field 
+                        :name="'name'" 
+                        :label="'Name'" 
+                        :classlabel="'form-label'"
+                        :classinput="'form-control'"
+                        :value="$task->name" />
+
+                        <x-molecules.text_input_field 
+                        :name="'description'" 
+                        :label="'Description:'" 
+                        :classlabel="'form-label'"
+                        :value="$task->description" 
+                        :classinput="'form-control'" />
 
                         <div class="form-group mb-3">
                             <label for="project_id">Project Name:</label>
@@ -50,23 +50,21 @@
                                 @endforeach
                             </select>
                         </div>
+                        <x-molecules.date_picker_fied 
+                        :classlabel="'form-label'" 
+                        :name="'start_time'" 
+                        :label="'Start Time:'"
+                        :class="'form-control'" 
+                        :value="date('Y-m-d', strtotime($task->start_time))" />
 
-                        {{-- <div class="form-group mb-3">
-                            <label for="start_time">Start Time:</label>
-                            <input type="datetime-local" name="start_time" id="start_time" class="form-control"
-                                value="{{ $task->start_time }}">
-                        </div> --}}
+                        <x-molecules.date_picker_fied 
+                        :classlabel="'form-label'" 
+                        :name="'end_time'" 
+                        :label="'Start Time:'"
+                        :class="'form-control'" 
+                        :value="date('Y-m-d', strtotime($task->end_time))" />
 
-                        <x-molecules.date_picker_fied :classlabel="'form-label'" :name="'start_time'" :label="'Start Time:'"
-                            :class="'form-control'" :value="$task->start_time" />
 
-                        {{-- <div class="form-group mb-3">
-                            <label for="end_time">End Time:</label>
-                            <input type="datetime-local" name="end_time" id="end_time" class="form-control"
-                                value="{{ $task->end_time }}">
-                        </div> --}}
-                        <x-molecules.date_picker_fied :classlabel="'form-label'" :name="'end_time'" :label="'Start Time:'"
-                            :class="'form-control'" :value="$task->end_time" />
 
                         <div class="form-group mb-3">
                             <label for="priority">Priority:</label>
@@ -89,7 +87,9 @@
                         </div>
 
                         <div class="d-flex   justify-content-start  ">
-                            <x-atoms.button :class="'btn btn-primary '" :text="'Submit'" />
+                            <x-atoms.button 
+                            :class="'btn btn-primary '" 
+                            :text="'Submit'" />
                             <a href="/task/" class="btn btn-dark mx-2">Cancel</a>
                         </div>
                     </form>

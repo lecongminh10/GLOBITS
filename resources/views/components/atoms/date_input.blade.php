@@ -1,2 +1,2 @@
 
-<input type="datetime-local" value="{{ $value }}" name="{{$name}}" class="{{$class}}">
+<input type="date" id="{{ $id }}" name="{{ $name }}" class="{{ $class }}" value="{{$value}}">

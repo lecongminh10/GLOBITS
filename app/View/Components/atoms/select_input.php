@@ -14,14 +14,15 @@ class select_input extends Component
     public $multiple;
     public $tam;
 
-    public $key;
-
-    public function __construct($multiple,$tam , $key)
+    public $field;
+   
+    public function __construct($multiple,$tam , $field )
     {
         //
         $this ->multiple= $multiple;
         $this ->tam= $tam;
-        $this ->key= $key;
+        $this ->field= $field;
+     
     }
 
     /**

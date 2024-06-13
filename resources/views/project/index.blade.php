@@ -54,7 +54,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title mb-0">List-Person</h3>
+                    <h3 class="card-title mb-0">List-Project</h3>
                     <a href="{{ route('project.create') }}" class="btn btn-primary float-end "><i
                             class="bi bi-patch-plus"></i>Add</a>
                 </div>

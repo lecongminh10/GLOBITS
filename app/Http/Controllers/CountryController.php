@@ -4,57 +4,54 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CountryRequest;
 use App\Models\Country;
-
+use App\Services\CountryService;
+use Illuminate\Http\Request;
 
 class CountryController extends Controller
 {
     //
-    public function index(){
-        $countries = Country::paginate(10);
 
-        return view('country.index' , ['countries' =>$countries]);
+    protected $countryService;
+
+    public function __construct(CountryService $countryService)
+    {
+        $this->countryService = $countryService;
+    }
+    public function index(Request $request)
+    {
+        $perPage = $request->get('per_page', 10); 
+        $countries = $this->countryService->paginate($perPage);
+        return view('country.index', ['countries' => $countries]);
     }
 
-    public function create(){
+    public function create()
+    {
         return view('country.create');
     }
 
-    public function store(CountryRequest $request){
-
-
-        $country= new Country;
-        $country ->name= $request ->name;
-                            
-        $country ->code = $request ->code;
-
-        $country ->description = $request ->description;
-
-        $country ->save();
-        return redirect()->route('country.index')->with('success' , 'Country more successful');
+    public function store(CountryRequest $request)
+    {
+        $data = $request->all();
+        $this->countryService->createCountry($data);
+        return redirect()->route('country.index')->with('success', 'Country more successful');
     }
 
-    public function edit(string $id){
-        $country =Country::findOrFail($id);
-
-        return view('country.edit' , ['country' =>$country]);
-
-        
+    public function edit(string $id)
+    {
+        $country = $this->countryService->getById($id);
+        return view('country.edit', ['country' => $country]);
     }
 
-    public function update( CountryRequest  $request , string $id){
-        $country = Country::findOrFail($id);
-
-        $country ->update([
-            'code' =>$request ->code,
-            'name' => $request ->name,
-            'description' =>$request ->description
-        ]);
-        return redirect()->route('country.index')->with('success' , 'Update successful');
+    public function update(CountryRequest  $request, string $id)
+    {
+        $data = $request->all();
+        $this->countryService->updateCompany($id, $data);
+        return redirect()->route('country.index')->with('success', 'Update successful');
     }
 
-    public function destroy(string $id){
-        $country = Country::findOrFail($id);
-        $country ->delete();
-        return redirect()->route('country.index')->with('success' , 'Delete successful');
+    public function destroy(string $id)
+    {
+        $this->countryService->delete($id);
+        return redirect()->route('country.index')->with('success', 'Delete successful');
     }
 }

@@ -2,25 +2,24 @@
 
 namespace App\View\Components\atoms;
 
-use Closure;
-use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
+use Illuminate\Contracts\View\View;
+use Closure;
 
-class label extends Component
+class Label extends Component
 {
-    /**
-     * Create a new component instance.
-     */
-    public function __construct()
+    public $classlabel;
+    public $text;
+
+    public function __construct($classlabel, $text)
     {
-        //
+        $this->classlabel = $classlabel;
+        $this->text = $text;
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     */
     public function render(): View|Closure|string
     {
         return view('components.atoms.label');
     }
 }
+

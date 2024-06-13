@@ -7,10 +7,10 @@
 
 <!-- atoms.select_input.blade.php -->
 
-<select {{ $attributes->merge(['class' => 'form-select', 'multiple' => $multiple]) }} name="{{ $name }}">
+<select {{ $attributes->merge(['class' => 'form-select']) }} name="{{ $name }}"  $multiple>
     <option value="">None</option>
     @foreach($options as $option)
-    <option  value="{{ $option->id}}">{{ $option->{$field} }}</option>
+    <option  value="{{ $option->id}}">{{ $option-> $field}}</option>
     @endforeach
 </select>
 
