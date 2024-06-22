@@ -27,19 +27,30 @@
                             <select multiple class="form-select" id="roles" name="roles[]">
                                 @foreach ($roles as $role)
                                     <option value="{{ $role->id }}"
-                                        {{ in_array($role->id, $user->roles->pluck('id')->toArray()) ? 'selected' : '' }}>
+                                        {{ $role->id == $user->roles->pluck('id')->toArray() ? 'selected' : '' }}>
                                         {{ $role->role }}
                                     </option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="mb-3">
-                            <label for="is_active" class="form-label">Status</label>
-                            <select id="is_active" class="form-select" name="is_active">
-                                <option value="active" @if ($user->is_active == 'active') selected @endif>Active</option>
-                                <option value="inactive" @if ($user->is_active == 'inactive') selected @endif>Inactive</option>
-                            </select>
-                        </div>
+
+                        @php
+                        $is_actives = [
+                            ['id' => 'active', 'value' => 'Active'],
+                            ['id' => 'inactive', 'value' => 'Unactive'],
+                        ];
+                       @endphp
+                        <div class=" form-group mb-3">
+                        <x-atoms.label 
+                        :classlabel="'form-label'" 
+                        :text="'Status'" />
+                        <x-atoms.select_input_tus 
+                        :name="'is_active'" 
+                        :options="$is_actives" 
+                        :selected="$user->is_active"
+                        :field="'value'"
+                        :multiple="false" />
+                       </div>
 
                         <x-atoms.button :class="'btn btn-primary '" :text="'Submit'" />
                         <a href="/user" class="btn btn-dark ">Cancel</a>

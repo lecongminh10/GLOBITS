@@ -32,9 +32,4 @@ class Person extends Model
     {
         return $this->belongsTo(User::class);
     }
-    // public static function getAll()
-    // {
-    //     return self::with('user', 'company')->orderBy('id', 'desc')->get();
-    // }
-
 }

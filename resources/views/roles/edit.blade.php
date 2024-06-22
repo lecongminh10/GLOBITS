@@ -25,9 +25,7 @@
                     <div class="hstack gap-2 justify-content-end">
 
                         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                        {{-- <button type="submit" class="btn btn-success" id="add-btn">Add Customer</button> --}}
                         <x-atoms.button :class="'btn btn-primary '" :text="'Submit'" />
-          
                     </div>
                 </div>
             </form>

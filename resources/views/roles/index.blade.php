@@ -2,38 +2,7 @@
 
 @section('title', 'List - Roles')
 
-@section('content')
-    {{-- <div class="row">
-        <h3 class="text-center">List-Roles</h3>
-        <a href="{{ route('role.create') }}" class="col-1 my-3 btn bg-primary text-white"><i class="bi bi-patch-plus"></i> Add</a>
-    </div>
-    <table class="table table-hover table-striped">
-        <thead>
-            <tr>
-                <th>STT</th>
-                <th>Role</th>
-                <th>Description</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($roles as $role)
-                <tr>
-                    <td>{{ $role->id }}</td>
-                    <td>{{ $role->role }}</td>
-                    <td>{{ $role->description }}</td>
-                    <td>
-                        <a href="{{ route('role.edit', $role->id) }}" class="btn btn-primary"><i class="bi bi-pencil"></i> Edit</a>
-                        <form action="{{ route('role.destroy', $role->id) }}" method="POST" class="d-inline">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?')"><i class="bi bi-trash"></i> Delete</button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table> --}}
+
 @section('content')
     <div class="row">
         <div class="col-lg-12">
@@ -65,30 +34,17 @@
                         </div>
 
                         <div class="table-responsive table-card mt-3 mb-1">
-                            <table class="table align-middle table-nowrap" id="customerTable">
-                                {{-- <thead class="table-light">
-                                    <tr>
-                                        <th>STT</th>
-                                        <th>Role</th>
-                                        <th>Description</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead> --}}
-                                @include('components.atoms.table_head', [
-                                    'idClassThead' => 'table-light',
-                                    'headers' => ['Id', 'Role', 'Description', 'Action'],
-                                ])
-                                <tbody class="list form-check-all">
+                            <x-molecules.table :classTable="'table align-middle table-nowrap'" :idTable="'customerTable'">
+                                <x-slot name="theah">
+                                    <x-atoms.table_head :idClassThead="'table-light'" :headers="['Id', 'Role', 'Description', 'Action']" />
+                                </x-slot>
+                                <x-slot name="tbody">
                                     @foreach ($roles as $role)
                                         <tr>
-
-
                                             <td>{{ $role->id }}</td>
                                             <td>{{ $role->role }}</td>
                                             <td>{{ $role->description }}</td>
                                             <td>
-                                                {{-- <a href="{{ route('role.edit', $role->id) }}" class="btn btn-primary"><i class="bi bi-pencil"></i> Edit</a> --}}
-
                                                 <button onclick="editRoles({{ $role->id }})" class="btn btn-primary "
                                                     data-bs-toggle="modal" id="create-btn"
                                                     data-bs-target="#showModalEdit"><i class="ri-edit-2-line"></i> </button>
@@ -104,25 +60,10 @@
                                             </td>
                                         </tr>
                                     @endforeach
-                                </tbody>
-                            </table>
-                            <div class="noresult" style="display: none">
-                                <div class="text-center">
-                                    <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop"
-                                        colors="primary:#121331,secondary:#08a88a"
-                                        style="width:75px;height:75px"></lord-icon>
-                                    <h5 class="mt-2">Sorry! No Result Found</h5>
-                                    <p class="text-muted mb-0">We've searched more than 150+ Orders We did not find any
-                                        orders for you search.</p>
-                                </div>
-                            </div>
+                                </x-slot>
+                            </x-molecules.table>
                         </div>
-
-
-
-
-                        @include('components.molecules.pagination', ['paginator' => $roles])
-
+                        <x-molecules.pagination :paginator="$roles"/>
                     </div>
                 </div><!-- end card -->
             </div>

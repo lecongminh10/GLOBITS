@@ -13,17 +13,4 @@ class CountryRepository extends BaseRepository
         $this ->countryRepository = $countryRepository;
     }
 
-    public function createRepository(array $data)
-    {
-        $countryRepository = $this->countryRepository->create($data);
-
-        return $countryRepository;
-    }
-    public function update($id, array $data)
-    {
-        $countryRepository = $this->countryRepository->findOrFail($id);
-
-        $countryRepository->update($data);
-        return $countryRepository;
-    }
 }

@@ -22,6 +22,4 @@ class Task extends Model
         'description',
         'status'
     ];
-
-
 }

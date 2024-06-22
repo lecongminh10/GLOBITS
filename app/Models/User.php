@@ -31,30 +31,16 @@ class User extends Authenticatable
         return $this ->hasOne(Person::class);
     }
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
+ 
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-
-    // public static function getID_Name(){
-    //     $users = User::select('id', 'name')->get();
-    //     return $users;
-    // }
     public function roles()
     {
         return $this->belongsToMany(Role::class);

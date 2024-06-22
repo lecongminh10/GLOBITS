@@ -16,21 +16,6 @@ class CompanyRepository extends BaseRepository
         $this->companyRepository = $companyRepository;
     }
 
-    public function createRepository(array $data)
-    {
-        $companyRepository = $this->companyRepository->create($data);
-
-        return $companyRepository;
-    }
-
-    public function update($id, array $data)
-    {
-        $companyRepository = $this->companyRepository->findOrFail($id);
-
-        $companyRepository->update($data);
-        return $companyRepository;
-    }
-
 
     public function getID_Name()
     {

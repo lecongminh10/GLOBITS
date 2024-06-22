@@ -3,6 +3,9 @@
 namespace App\Services;
 
 use App\Repositories\BaseRepository;
+use Exception;
+use Faker\Extension\Extension;
+use Illuminate\Support\Facades\DB;
 
 class BaseService
 {
@@ -28,21 +31,37 @@ class BaseService
         return $this->repository->paginate($perPage);
     }
 
-    public function delete($id)
-    {
-        return $this->repository->delete($id);
+    public function saveOrUpdate(array $input , int $id = null){
+        try{
+            DB::beginTransaction();
+            if(isset($id)){
+                $input['id'] = $id;
+                
+            }
+            $result = $this->repository->saveOrUpdateItem($input , $id);
+            DB::commit();
+            if($result){
+                return $result;
+            }else{
+                throw new Exception("Cant save or update information");
+            }
+        }catch(Extension $e){
+            DB::rollBack();
+            throw $e;
+        }
     }
-    
 
-    // thêm 
+    public function delete(int $id){
+        try{
+            DB::beginTransaction();
+            $result = $this->repository->delete($id);
+            DB::commit();
+            return $result;
 
-    public function create(array $data){
-
-        return $this ->repository->create($data);
+        }
+        catch(Exception $e){
+            DB::rollBack();
+            throw $e;
+        }
     }
-
-    //
-    public function update($id , array $data){
-        return $this ->repository ->update($id , $data);
-     }
 }

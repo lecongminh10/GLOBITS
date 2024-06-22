@@ -18,15 +18,6 @@ class PersonService extends BaseService
         return $this->personService->getPersonWithCompanyAndUser($personId);
 
     }
-    public function createPerson(array $data)
-    {
-        return $this->personService->createRepository($data);
-    }
-    public function updatePerson($id, array $data)
-    {
-        $this->personService->getById($id);
-        return $this->personService->update($id, $data);
-    }
 
     public function getID_Name(){
         return $this ->personService ->getID_Name();

@@ -21,11 +21,22 @@
                         <x-molecules.text_input_field :name="'email'" :label="'Email'" :classlabel="'form-label'"
                             :classinput="'form-control'" />
 
-                        <x-molecules.text_input_field :name="'password'" :label="'Password'" :classlabel="'form-label'"
-                            :key="'id'" :classinput="'form-control'" />
-                        <x-molecules.select_field :tam="''" :classlabel="'form-label'" :name="'roles[]'"
-                            :label="'Roles'" :options="$roles" :field="'role'" :multiple="true"
-                            :tam="''" />
+                        <x-molecules.text_input_field 
+                        :name="'password'" 
+                        :label="'Password'" 
+                        :selected="''"
+                        :classlabel="'form-label'"
+                        :key="'id'" 
+                        :classinput="'form-control'" />
+                        <x-molecules.select_field  
+                        :classlabel="'form-label'" 
+                        :name="'roles[]'"
+                        :label="'Roles'" 
+                        :selected="''"
+                        :options="$roles" 
+                        :field="'role'" 
+                        :multiple="true"
+                        :tam="''" />
 
                         @php
                             $is_actives = [
@@ -34,9 +45,16 @@
                             ];
                         @endphp
                         <div class=" form-group mb-3">
-                            <x-atoms.label :classlabel="'form-label'" :text="'Status'" />
-                            <x-atoms.select_input_tus :name="'is_active'" :options="$is_actives" :field="'value'"
-                                :multiple="false" />
+                            <x-atoms.label 
+                            :classlabel="'form-label'" 
+                            :text="'Status'" />
+                            <x-atoms.select_input_tus 
+                            :name="'is_active'" 
+                            :selected="''"
+                            :options="$is_actives" 
+                            :field="'value'"
+                          
+                            :multiple="false" />
                         </div>
                         <x-atoms.button :class="'btn btn-primary '" :text="'Submit'" />
 

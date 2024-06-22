@@ -18,27 +18,24 @@
                 <div class="card-body">
                     <form action="{{ route('company.store') }}" method="POST">
                         @csrf
-                        {{-- <div class="mb-3">
-                        <label for="code" class="form-label">Code</label>
-                        <input type="text" class="form-control" id="code" name="code" >
-                    </div> --}}
-                        <x-molecules.text_input_field :name="'code'" :label="'Code'" :classlabel="'form-label'"
-                            :classinput="'form-control'" />
 
+                        <x-molecules.text_input_field 
+                        :name="'code'" 
+                        :label="'Code'" 
+                        :classlabel="'form-label'"
+                        :classinput="'form-control'" />
 
-                        {{-- <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" >
-                    </div> --}}
-                        <x-molecules.text_input_field :name="'name'" :label="'Name'" :classlabel="'form-label'"
-                            :classinput="'form-control'" />
+                        <x-molecules.text_input_field 
+                        :name="'name'" 
+                        :label="'Name'" 
+                        :classlabel="'form-label'"
+                        :classinput="'form-control'" />
 
-                        {{-- <div class="mb-3">
-                        <label for="address" class="form-label">Address</label>
-                        <input type="text" class="form-control" id="address" name="address" >
-                    </div> --}}
-                        <x-molecules.text_input_field :name="'address'" :label="'Address'" :classlabel="'form-label'"
-                            :classinput="'form-control'" />
+                        <x-molecules.text_input_field 
+                        :name="'address'" 
+                        :label="'Address'" 
+                        :classlabel="'form-label'"
+                        :classinput="'form-control'" />
 
                         <x-atoms.button :class="'btn btn-primary '" :text="'Submit'" />
 

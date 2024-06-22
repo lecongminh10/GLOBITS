@@ -12,14 +12,14 @@
                     <h4 class="card-title mb-0">List - Company</h4>
                 </div>
                 @if (Session::has('success'))
-                <div class="alert alert-success">
-                    {{ Session::get('success') }}
-                </div>
+                    <div class="alert alert-success">
+                        {{ Session::get('success') }}
+                    </div>
                 @endif
                 @if (Session::has('error'))
-                <div class="alert alert-danger">
-                    {{ Session::get('error') }}
-                </div>
+                    <div class="alert alert-danger">
+                        {{ Session::get('error') }}
+                    </div>
                 @endif
                 <div class="card-body">
                     <div class="listjs-table" id="customerList">
@@ -32,7 +32,6 @@
                                             id="create-btn" data-bs-target="#showModal"><i
                                                 class="ri-add-line align-bottom me-1"></i> Add</button>
                                     </a>
-
                                 </div>
 
                             </div>
@@ -47,23 +46,14 @@
                         </div>
 
                         <div class="table-responsive table-card mt-3 mb-1">
-                            <table class="table align-middle table-nowrap" id="customerTable">
-                                {{-- <thead class="table-light">
-                                <tr>
-                                    <th>STT</th>
-                                    <th>Code</th>
-                                    <th>Name</th>
-                                    <th>Address</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead> --}}
 
-                                @include('components.atoms.table_head', [
-                                    'idClassThead' => 'table-light',
-                                    'headers' => ['STT', 'Code', 'Name', 'Address', 'Action'],
-                                ])
-                                <tbody class="list form-check-all">
+                            <x-molecules.table :classTable="'table align-middle table-nowrap'" :idTable="'customerTable'">
+                                <x-slot name="theah">
+                                    <x-atoms.table_head :idClassThead="'table-light'" :headers="['STT', 'Code', 'Name', 'Address', 'Action']" />
+                                </x-slot>
+                                <x-slot name="tbody">
                                     @foreach ($companies as $company)
+                                    <tr>
                                         <td>{{ $company->id }}</td>
                                         <td>{{ $company->code }}</td>
                                         <td>{{ $company->name }}</td>
@@ -84,26 +74,12 @@
                                             </form>
 
                                         </td>
-                                        </tr>
+                                      </tr>
                                     @endforeach
-                                </tbody>
-                            </table>
-                            <div class="noresult" style="display: none">
-                                <div class="text-center">
-                                    <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop"
-                                        colors="primary:#121331,secondary:#08a88a"
-                                        style="width:75px;height:75px"></lord-icon>
-                                    <h5 class="mt-2">Sorry! No Result Found</h5>
-                                    <p class="text-muted mb-0">We've searched more than 150+ Orders We did not find any
-                                        orders for you search.</p>
-                                </div>
-                            </div>
+                                </x-slot>
+                            </x-molecules.table>
                         </div>
-
-                        {{-- phân trang  --}}
-                        @include('components.molecules.pagination', ['paginator' => $companies])
-
-
+                        <x-molecules.pagination :paginator="$companies"/>
                     </div>
                 </div><!-- end card -->
             </div>

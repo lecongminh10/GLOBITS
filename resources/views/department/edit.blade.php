@@ -22,24 +22,30 @@
         
                     @csrf
 
-                    <x-molecules.text_input_field :name="'code'" :label="'Code'" :classlabel="'form-label'"
-                    :classinput="'form-control'" :value="$department ->code"/>
+                    <x-molecules.text_input_field 
+                    :name="'code'" 
+                    :label="'Code'" 
+                    :classlabel="'form-label'"
+                    :classinput="'form-control'" 
+                    :value="$department ->code"/>
       
-                    <x-molecules.text_input_field :name="'name'" :label="'Name'" :classlabel="'form-label'"
-                    :classinput="'form-control'" :value="$department ->name"/>
+                    <x-molecules.text_input_field 
+                    :name="'name'" 
+                    :label="'Name'" 
+                    :classlabel="'form-label'"
+                    :classinput="'form-control'" 
+                    :value="$department ->name"/>
 
                     <input type="hidden" name="company_id" value="{{$companyId}}">
+                    
+                    <x-molecules.select_field 
+                    :classlabel="'form-label'" 
+                    :name="'parent_id'" 
+                    :selected="$department->parent_id"
+                    :label="'Perent department:'" 
+                    :options="$departments"
+                    :field="'name'" :multiple="false" />
 
-
-                    <div class="mb-3">
-                        <label for="address" class="form-label">Perent department</label>
-                        <select  id="" class="form-control " name="parent_id">
-                                <option value="">None</option>
-                            @foreach ($departments as $value)
-                                <option value="{{$value ->id}}" {{($department ->parent_id == $value->id)?'selected' :""}}>{{$value ->name}}</option>
-                            @endforeach
-                        </select>
-                    </div>
                    <x-atoms.button :class="'btn btn-primary '" :text="'Submit'" />
                     <a href="/company/{{$companyId}}/department" class="btn btn-secondary">Cancel</a>
                 </form>

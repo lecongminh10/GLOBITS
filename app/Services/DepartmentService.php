@@ -14,12 +14,6 @@ class DepartmentService extends BaseService
             $this ->departmentService = $departmentService;
         }
 
-        // thêm 
-        public function createDepartment(array $data)
-        {
-            return $this->departmentService->createRepository($data);
-        }
-
         // lấy tất cả các department có cùng id là company
         public function getAllDepartment_IDcompany($id, $perPage = 10)
         {
@@ -30,18 +24,13 @@ class DepartmentService extends BaseService
            
             return $this ->departmentService ->getAllDepartment_ID($id);
       }
-      public function updateDepartment($id, array $data)
-      {
-          $this->departmentService->getById($id);
-          return $this->departmentService->update($id, $data);
-      }
       // đếm số department con
       public function getChildDepartmentsCount($id){
         return $this ->departmentService->getChildDepartmentsCount($id);
       }
       // đếm số department trong commany
-      public function Company_getChildDepartmentsCount($id)
+      public function companygetChildDepartmentsCount($id)
       {
-        return $this ->departmentService->Company_getChildDepartmentsCount($id);
+        return $this ->departmentService->companygetChildDepartmentsCount($id);
       }
  }

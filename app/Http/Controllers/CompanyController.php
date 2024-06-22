@@ -36,7 +36,7 @@ class CompanyController extends Controller
     public function store(CompanyRequest $request)
     {
         $data = $request->only(['code', 'name', 'address']);
-        $this->companyService->createCompany($data);
+        $this->companyService->saveOrUpdate($data);
         return redirect()->route('company.index')->with('success', 'Company created successfully.');
     }
     public function edit(string $id)
@@ -47,16 +47,14 @@ class CompanyController extends Controller
     public function update(CompanyRequest $request, string $id)
     {
         $data = $request->only(['code', 'name', 'address']);
-        $this->companyService->updateCompany($id, $data);
+        $this->companyService->saveOrUpdate($data ,);
         return redirect()->route('company.index')->with('success', 'Company updated successfully.');
     }
     public function destroy(string $id)
     {
 
         $childDepartmentsCount = $this->departmentService->getChildDepartmentsCount($id);
-
-        $childProjectCount = $this->projectService-> Company_getChildProjectCount($id);
-    
+        $childProjectCount = $this->projectService-> companygetChildProjectCount($id);
         if ($childDepartmentsCount > 0 || $childProjectCount >0) {
             return redirect()->route('company.index')->with('error', 'Cannot delete company because it has department or project.');
         }

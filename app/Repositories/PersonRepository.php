@@ -29,13 +29,6 @@ class PersonRepository extends BaseRepository
         ];
     }
 
-    public function createRepository(array $data)
-    {
-        $personRepository = $this->personRepository->create($data);
-
-        return $personRepository;
-    }
-
     public function getID_Name(){
         $userRepository = Person::select('id', 'full_name')->get();
         return $userRepository;

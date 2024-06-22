@@ -13,23 +13,13 @@ class ProjectService extends BaseService
             parent::__construct($projectService);
             $this ->projectService = $projectService;
         }
-        public function createProject(array $data)
-        {
-            return $this->projectService->createRepository($data);
-        }
-        public function updateProject($id, array $data)
-        {
-
-            $this->projectService->getById($id);
-            return $this->projectService->update($id, $data);
-        }
-
+ 
         public function getID_Name(){
             return $this ->projectService ->getID_Name();
         }
 
         // đếm số project thuộc company
-        public function Company_getChildProjectCount($company_id){
-            return $this ->projectService ->Company_getChildProjectCount($company_id);
+        public function companygetChildProjectCount($company_id){
+            return $this ->projectService ->companygetChildProjectCount($company_id);
         }
 }

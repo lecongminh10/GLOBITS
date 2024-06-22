@@ -12,15 +12,15 @@ class select_input extends Component
      * Create a new component instance.
      */
     public $multiple;
-    public $tam;
+    public $selected;
 
     public $field;
    
-    public function __construct($multiple,$tam , $field )
+    public function __construct($multiple , $field ,$selected=null )
     {
         //
         $this ->multiple= $multiple;
-        $this ->tam= $tam;
+        $this ->selected= $selected;
         $this ->field= $field;
      
     }
@@ -30,6 +30,6 @@ class select_input extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.atoms.select_input',['multiple'=>$this->multiple , 'tam'=>$this->tam]);
+        return view('components.atoms.select_input',['multiple'=>$this->multiple , 'selected'=>$this->selected]);
     }
 }

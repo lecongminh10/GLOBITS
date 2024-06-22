@@ -41,7 +41,7 @@ class UserController extends Controller
         if ($request->has('roles')) {
             $data['roles'] = $request->roles;
         }
-        $this->userService->createUser($data);
+        $this->userService->saveOrUpdate($data);
         return redirect()->route('user.index')->with('success', 'User more successful');
     }
 
@@ -75,7 +75,7 @@ class UserController extends Controller
         if ($request->has('roles')) {
             $data['roles'] = $request->roles;
         }
-        $this->userService->updateUser($id, $data);
+        $this->userService->saveOrUpdate($data , $id);
         return redirect()->route('user.index')->with('success', 'Update successful');
     }
 

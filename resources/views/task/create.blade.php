@@ -15,23 +15,47 @@
                     <form method="POST" action="{{ route('task.store') }}">
                         @csrf
 
-                        <x-molecules.text_input_field :name="'name'" :label="'Name'" :classlabel="'form-label'"
-                            :classinput="'form-control'" />
+                        <x-molecules.text_input_field 
+                        :name="'name'" 
+                        :label="'Name'" 
+                        :classlabel="'form-label'"
+                        :classinput="'form-control'" />
 
-                        <x-molecules.text_input_field :name="'description'" :label="'Description:'" :classlabel="'form-label'"
-                            :classinput="'form-control'" />
+                        <x-molecules.text_input_field 
+                        :name="'description'" 
+                        :label="'Description:'" 
+                        :classlabel="'form-label'"
+                        :classinput="'form-control'" />
 
-                        <x-molecules.select_field :classlabel="'form-label'" :name="'project_id'" :label="'Roles'" :options="$projects"
-                            :field="'name'" :multiple="true" />
+                        <x-molecules.select_field 
+                        :classlabel="'form-label'" 
+                        :name="'project_id'" 
+                        :label="'Project'" 
+                        :selected="''"
+                        :options="$projects"
+                        :field="'name'" 
+                        :multiple="true" />
 
-                        <x-molecules.select_field :classlabel="'form-label'" :name="'person_id'" :label="'Person Name:'"
-                            :options="$persons" :field="'full_name'" :multiple="true" />
+                        <x-molecules.select_field 
+                        :classlabel="'form-label'" 
+                        :name="'person_id'" 
+                        :selected="''"
+                        :label="'Person Name:'"
+                        :options="$persons" 
+                        :field="'full_name'" 
+                        :multiple="true" />
 
-                        <x-molecules.date_picker_fied :name="'start_time'" :label="'Start Time:'" :classlabel="'form-label'"
-                            :class="'form-control'" />
+                        <x-molecules.date_picker_fied 
+                        :name="'start_time'" 
+                        :label="'Start Time:'" 
+                        :classlabel="'form-label'"
+                        :class="'form-control'" />
 
-                        <x-molecules.date_picker_fied :classlabel="'form-label'" :name="'end_time'" :label="'End Time:'"
-                            :class="'form-control'" />
+                        <x-molecules.date_picker_fied 
+                        :classlabel="'form-label'" 
+                        :name="'end_time'" 
+                        :label="'End Time:'"
+                        :class="'form-control'" />
 
                         @php
                             $priorities = [
@@ -41,9 +65,16 @@
                             ];
                         @endphp
                         <div class=" form-group mb-3">
-                            <x-atoms.label :classlabel="'form-label'" :text="'Priority'" />
-                            <x-atoms.select_input_tus :name="'priority'" :options="$priorities" :field="'value'"
-                                :multiple="false" />
+                            <x-atoms.label 
+                            :classlabel="'form-label'" 
+                            :text="'Priority'" />
+                            <x-atoms.select_input_tus 
+                            :name="'priority'" 
+                            :selected="''"
+                            :options="$priorities" 
+                            :field="'value'"
+                            :multiple="false" />
+                          
                         </div>
 
                         @php
@@ -55,9 +86,16 @@
                             ];
                         @endphp
                         <div class=" form-group mb-3">
-                            <x-atoms.label :classlabel="'form-label'" :text="'Status:'" />
-                            <x-atoms.select_input_tus :name="'status'" :options="$status" :field="'value'"
-                                :multiple="false" />
+                            <x-atoms.label 
+                            :classlabel="'form-label'" 
+                            :text="'Status:'" />
+                            <x-atoms.select_input_tus 
+                            :name="'status'"
+                            :selected="''"
+                            :options="$status" 
+                            :field="'value'"
+                            :multiple="false" />
+                            
                         </div>
 
                         <x-atoms.button :class="'btn btn-primary '" :text="'Submit'" />

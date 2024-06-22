@@ -17,28 +17,34 @@
                         @csrf
 
 
-                        <x-molecules.text_input_field :name="'code'" :label="'Code'" :classlabel="'form-label'"
-                        :classinput="'form-control'" :value="$project->code"/>
+                        <x-molecules.text_input_field 
+                        :name="'code'" :label="'Code'" 
+                        :classlabel="'form-label'"
+                        :classinput="'form-control'" 
+                        :value="$project->code"/>
 
-                        <x-molecules.text_input_field :name="'name'" :label="'Name'" :classlabel="'form-label'"
-                        :classinput="'form-control'" :value="$project->name"/>
+                        <x-molecules.text_input_field 
+                        :name="'name'" :label="'Name'" 
+                        :classlabel="'form-label'"
+                        :classinput="'form-control'" 
+                        :value="$project->name"/>
 
-                        <x-molecules.text_input_field :name="'description'" :label="'Description'" :classlabel="'form-label'"
-                        :classinput="'form-control'" :value="$project->description"/>
+                        <x-molecules.text_input_field 
+                        :name="'description'" 
+                        :label="'Description'" 
+                        :classlabel="'form-label'"
+                        :classinput="'form-control'" 
+                        :value="$project->description"/>
 
+                        <x-molecules.select_field 
+                        :classlabel="'form-label'" 
+                        :name="'company_id'" 
+                        :selected="$project->company_id"
+                        :label="'Company'" 
+                        :options="$companies"
+                        :field="'name'" 
+                        :multiple="false" />
 
-                        <div class="mb-3">
-                            <label for="company" class="form-label">Company</label>
-                            <select class="form-select" id="company" name="company_id"
-                                value="{{ $project->company_id }}">
-                                <option value="">None</option>
-                                @foreach ($companies as $company)
-                                    <option value="{{ $company->id }}"
-                                        {{ $project->company_id == $company->id ? 'selected' : '' }}>{{ $company->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
                         <div class="mb-3">
                             <label for="persons" class="form-label">Persons</label>
                             <select class="form-select" id="persons" name="persons[]" multiple>
@@ -51,8 +57,7 @@
                                 @endforeach
                             </select>
                         </div>
-
-
+                    
                         <x-atoms.button :class="'btn btn-primary '" :text="'Update'" />
 
                         <a href="{{ route('project.index') }}" class="btn btn-secondary">Cancel</a>

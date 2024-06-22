@@ -1,6 +1,7 @@
 <?php
 
 use App\Exports\TasksExport;
+use App\Http\Controllers\api\CountryController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -29,3 +30,5 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/task/export-excel', [TaskController::class, 'export'])->name('task.export.excel');
+
+Route::resource('country', CountryController::class);

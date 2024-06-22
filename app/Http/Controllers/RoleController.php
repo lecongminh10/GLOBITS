@@ -19,8 +19,8 @@ class RoleController extends Controller
     }
     public function index(Request $request)
     {
-        $perPage = $request->get('per_page', 10); // Số lượng item mỗi trang, mặc định là 10
-        $roles = $this->roleService->paginate($perPage);
+        $perPage  = $request->get('per_page', 10); 
+        $roles    = $this->roleService->paginate($perPage);
         return view('roles.index', compact('roles'));
     }
 
@@ -32,9 +32,9 @@ class RoleController extends Controller
     public function store(RoleRequest $request)
     {
 
-        $data = $request ->all();
+        $data   = $request ->all();
 
-        $this ->roleService ->createRole($data);
+        $this ->roleService ->saveOrUpdate($data);
 
     return redirect()->route('role.index')->with('success', 'Role created successfully.');
 
@@ -49,9 +49,9 @@ class RoleController extends Controller
     public function update(RoleRequest $request, string $id)
     {
 
-        $data = $request ->all();
+        $data  = $request ->all();
 
-        $this ->roleService->updateRole($id , $data);
+        $this ->roleService->saveOrUpdate($data , $id);
 
         return redirect()->route('role.index')->with('success', 'Role update successfully.');
     }

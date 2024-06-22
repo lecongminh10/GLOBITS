@@ -13,48 +13,6 @@
     <link href="{{ asset('assets/libs/dropzone/dropzone.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
-    {{-- <div class="row">
-        <h3 class="text-center">List-Person</h3>
-        <a href="{{route('person.create')}}" class="col-1 my-3 btn bg-primary text-white "><i class="bi bi-patch-plus"></i> Add</a>
-    </div>
-    <table class="table table-hover table-striped ">
-        <thead>
-            <tr>
-                <th>STT</th>
-                <th>Full-Name</th>
-                <th>Birth Date</th>
-                <th>Phone Number</th>
-                <th>Company</th>
-                <th>Address</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($persons as $person)
-            <tr>
-                <td>{{$person ->id}}</td>
-              
-                <td>{{$person ->full_name}}</td>
-               
-                <td>{{$person ->birthdate}}</td>
-                <td>{{$person ->phone_number}}</td>
-                <td>{{$person ->company_name}}</td>
-                <td>{{$person ->address}}</td>
-                <td>
-                    <a href="/person/{{$person ->id}}" class="btn btn-primary "><i class="bi bi-arrow-clockwise"></i> </a>
-                    <form action="{{ route('person.destroy', $person->id) }}" method="POST" class="d-inline">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có muốn xóa không')"><i class="bi bi-trash"></i></button>
-                    </form>
-                  
-                </td>
-            </tr>
-            @endforeach
-
-        </tbody>
-    </table> --}}
-
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
@@ -64,28 +22,9 @@
                             class="bi bi-patch-plus"></i>Add</a>
                 </div>
                 <div class="card-body">
-                    <table id="model-datatables" class="table table-bordered nowrap table-striped align-middle"
-                        style="width:100%">
-                        {{-- <thead>
-                          
-                            <tr>
-                                <th>Id</th>
-                                <th>User-Name</th>
-                                <th>Full-Name</th>
-                                <th>Birth Date</th>
-                                <th>Phone Number</th>
-                                <th>Company</th>
-                                <th>Created At</th>
-                                <th>Update At</th>
-                                <th>Gender</th>
-                                <th>Address </th>
-                                <th>Action</th>
-                            </tr>
-                        </thead> --}}
-
-                        @include('components.atoms.table_head', [
-                            'idClassThead' => '',
-                            'headers' => [
+                    <x-molecules.table :classTable="'table table-bordered nowrap table-striped align-middle'" :idTable="'model-datatables'" style="width:100%">
+                        <x-slot name="theah">
+                            <x-atoms.table_head :idClassThead="''" :headers="[
                                 'Id',
                                 'User_Name',
                                 'Full_Name',
@@ -97,51 +36,51 @@
                                 'Gender',
                                 'Address',
                                 'Action',
-                            ],
-                        ])
-                        <tbody>
+                            ]" />
+                        </x-slot>
+                        <x-slot name="tbody">
                             @foreach ($persons as $person)
-                                <tr>
-                                    <td>{{ $person->id }}</td>
-                                    <td>{{ $person->user->name }}</td>
-                                    <td>{{ $person->full_name }}</td>
-                                    <td>{{ $person->birthdate }}</td>
-                                    <td>{{ $person->phone_number }}</td>
-                                    <td>{{ $person->company->name }}</td>
-                                    <td>{{ $person->created_at }}</td>
-                                    <td>{{ $person->updated_at }}</td>
-                                    <td><span class="badge bg-info-subtle text-info">{{ $person->gender }}</span></td>
-                                    <td><span>{{ $person->address }}</span></td>
-                                    <td>
-                                        <div class="dropdown d-inline-block">
-                                            <button class="btn btn-soft-secondary btn-sm dropdown" type="button"
-                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="ri-more-fill align-middle"></i>
-                                            </button>
-                                            <ul class="dropdown-menu dropdown-menu-end">
-                                                <li><a class="dropdown-item edit-item-btn"
-                                                        href="/person/{{ $person->id }}"><i
-                                                            class="ri-pencil-fill align-bottom me-2 text-muted"></i>
-                                                        Edit</a></li>
-                                                <li>
-                                                    <form action="{{ route('person.destroy', $person->id) }}"
-                                                        method="POST" class="d-inline">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class=" border-0 bg-white ms-3"
-                                                            onclick="return confirm('Bạn có muốn xóa không')"><i
-                                                                class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
-                                                            Delete</button>
-                                                    </form>
+                            <tr>
+                                <td>{{ $person->id }}</td>
+                                <td>{{ $person->user->name }}</td>
+                                <td>{{ $person->full_name }}</td>
+                                <td>{{ $person->birthdate }}</td>
+                                <td>{{ $person->phone_number }}</td>
+                                <td>{{ $person->company->name }}</td>
+                                <td>{{ $person->created_at }}</td>
+                                <td>{{ $person->updated_at }}</td>
+                                <td><span class="badge bg-info-subtle text-info">{{ $person->gender }}</span></td>
+                                <td><span>{{ $person->address }}</span></td>
+                                <td>
+                                    <div class="dropdown d-inline-block">
+                                        <button class="btn btn-soft-secondary btn-sm dropdown" type="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="ri-more-fill align-middle"></i>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item edit-item-btn"
+                                                    href="/person/{{ $person->id }}"><i
+                                                        class="ri-pencil-fill align-bottom me-2 text-muted"></i>
+                                                    Edit</a></li>
+                                            <li>
+                                                <form action="{{ route('person.destroy', $person->id) }}"
+                                                    method="POST" class="d-inline">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class=" border-0 bg-white ms-3"
+                                                        onclick="return confirm('Bạn có muốn xóa không')"><i
+                                                            class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
+                                                        Delete</button>
+                                                </form>
 
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </x-slot>
+                    </x-molecules.table>
                 </div>
             </div>
         </div>

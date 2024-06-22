@@ -24,7 +24,7 @@ class ProjectController extends Controller
     public function __construct(ProjectService $projectService, PersonService $personService, CompanyService $companyService)
     {
         $this->projectService = $projectService;
-        $this->personService = $personService;
+        $this->personService  = $personService;
         $this->companyService = $companyService;
     }
 
@@ -44,7 +44,7 @@ class ProjectController extends Controller
     public function store(ProjectRequest $request)
     {
         $data = $request->only(['code', 'name', 'description', 'company_id']);
-        $project = $this->projectService->createProject($data);
+        $project = $this->projectService->saveOrUpdate($data);
         if ($request->has('persons')) {
             $project->persons()->attach($request->persons);
         }
@@ -60,8 +60,8 @@ class ProjectController extends Controller
     public function update(ProjectRequest $request, string $id)
     {
 
-        $data = $request->only(['code', 'name', 'description', 'company_id']);
-        $project = $this->projectService->updateProject($id, $data);
+        $data    = $request->only(['code', 'name', 'description', 'company_id']);
+        $project = $this->projectService->saveOrUpdate($data , $id);
 
         if ($request->has('persons')) {
             $project->persons()->detach();

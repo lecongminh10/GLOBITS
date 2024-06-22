@@ -13,16 +13,6 @@ class RoleService extends BaseService
             parent::__construct($roleService);
             $this ->roleService = $roleService;
         }
-        public function createRole(array $data)
-        {
-            return $this->roleService->createRepository($data);
-        }
-        public function updateRole($id, array $data)
-        {
-
-            $this->roleService->getById($id);
-            return $this->roleService->update($id, $data);
-        }
 
         public function getID_Role(){
             return $this ->roleService->getID_Role();

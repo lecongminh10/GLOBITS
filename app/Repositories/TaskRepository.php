@@ -14,19 +14,6 @@ class TaskRepository extends BaseRepository
         $this ->taskRepository = $taskRepository;
 
     }
-    public function createRepository(array $data)
-    {
-        $taskRepository = $this->taskRepository->create($data);
-
-        return $taskRepository;
-    }
-    public function update($id, array $data)
-    {
-        $taskRepository = $this->taskRepository->findOrFail($id);
-
-        $taskRepository->update($data);
-        return $taskRepository;
-    }
 
     public function getAll(){
         $tasks = DB::table('tasks')

@@ -8,19 +8,16 @@ use Illuminate\View\Component;
 
 class tableheader extends Component
 {
-    /**
-     * Create a new component instance.
-     */
-    public function __construct()
+    public $th;
+    public function __construct($th)
     {
-        //
+        $this ->th = $th;
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     */
+
+
     public function render(): View|Closure|string
     {
-        return view('components.atoms.tableheader');
+        return view('components.atoms.tableheader' , ['th' =>$this->th]);
     }
 }

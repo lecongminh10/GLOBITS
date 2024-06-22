@@ -1,13 +1,11 @@
 
-
-{{-- atoms.table_head.blade.php --}}
-
-<!-- atoms.table_head.blade.php -->
+<!-- components.atoms.table_head -->
 <thead class="{{$idClassThead}}">
     <tr>
         @foreach($headers as $header)
-            @include('components.atoms.tableheader', ['slot' => $header])
+            <th>{{ $header }}</th>
         @endforeach
     </tr>
 </thead>
+
 

@@ -7,7 +7,6 @@ use App\Models\Department;
 class DepartmentRepository extends BaseRepository
 {
     protected $departmentRepository;
-
     public function __construct(Department $departmentRepository)
     {
         parent::__construct($departmentRepository);
@@ -24,7 +23,6 @@ class DepartmentRepository extends BaseRepository
     public function createRepository(array $data)
     {
         $departmentRepository = $this->departmentRepository->create($data);
-
         return $departmentRepository;
     }
 
@@ -36,7 +34,6 @@ class DepartmentRepository extends BaseRepository
     public function update($id, array $data)
     {
         $departmentRepository = $this->departmentRepository->findOrFail($id);
-
         $departmentRepository->update($data);
         return $departmentRepository;
     }
@@ -46,7 +43,7 @@ class DepartmentRepository extends BaseRepository
         return Department::where('parent_id', $parentDepartmentId)->count();
     }
 
-    public function Company_getChildDepartmentsCount($parentDepartmentId)
+    public function companygetChildDepartmentsCount($parentDepartmentId)
     {
         return Department::where('company_id ', $parentDepartmentId)->count();
     }

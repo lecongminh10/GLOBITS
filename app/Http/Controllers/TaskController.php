@@ -49,7 +49,7 @@ class TaskController extends Controller
     public function store(TaskRequest $request)
     {
         $data = $request->all();
-        $this->taskService->createTask($data);
+        $this->taskService->saveOrUpdate($data);
         return redirect()->route('task.index')->with('success', 'Task created successfully');
     }
 
@@ -64,7 +64,7 @@ class TaskController extends Controller
     public function update(TaskRequest $request, string $id)
     {
         $data = $request->all();
-        $this->taskService->updateTask($id, $data);
+        $this->taskService->saveOrUpdate($data , $id);
         return redirect()->route('task.index')->with('success', 'Task updated successfully');
     }
     public function destroy(string $id)

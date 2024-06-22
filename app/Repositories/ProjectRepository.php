@@ -16,21 +16,6 @@ class ProjectRepository extends BaseRepository
         $this->projectRepository = $projectRepository;
     }
 
-    public function createRepository(array $data)
-    {
-        $projectRepository = $this->projectRepository->create($data);
-
-        return $projectRepository;
-    }
-
-    public function update($id, array $data)
-    {
-        $projectRepository = $this->projectRepository->findOrFail($id);
-
-        $projectRepository->update($data);
-        return $projectRepository;
-    }
-
 
     public function getID_Name()
     {
@@ -38,7 +23,7 @@ class ProjectRepository extends BaseRepository
         return $project;
     }
 
-    public function Company_getChildProjectCount($company_id){
+    public function companygetChildProjectCount($company_id){
         return Project::where('company_id', $company_id)->count();
     }
 }

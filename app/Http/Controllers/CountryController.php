@@ -9,8 +9,7 @@ use Illuminate\Http\Request;
 
 class CountryController extends Controller
 {
-    //
-
+    
     protected $countryService;
 
     public function __construct(CountryService $countryService)
@@ -32,7 +31,8 @@ class CountryController extends Controller
     public function store(CountryRequest $request)
     {
         $data = $request->all();
-        $this->countryService->createCountry($data);
+        $this->countryService->saveOrUpdate($data);
+
         return redirect()->route('country.index')->with('success', 'Country more successful');
     }
 
@@ -45,7 +45,7 @@ class CountryController extends Controller
     public function update(CountryRequest  $request, string $id)
     {
         $data = $request->all();
-        $this->countryService->updateCompany($id, $data);
+        $this->countryService->saveOrUpdate($data , $id);
         return redirect()->route('country.index')->with('success', 'Update successful');
     }
 

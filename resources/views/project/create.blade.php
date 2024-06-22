@@ -16,19 +16,41 @@
                     <form action="{{ route('project.store') }}" method="POST">
                         @csrf
 
-                        <x-molecules.text_input_field :name="'code'" :label="'Code'" :classlabel="'form-label'"
+                        <x-molecules.text_input_field 
+                        :name="'code'" 
+                        :label="'Code'" 
+                        :classlabel="'form-label'"
                         :classinput="'form-control'" />
 
-                        <x-molecules.text_input_field :name="'name'" :label="'Name'" :classlabel="'form-label'"
-                        :classinput="'form-control'" />
-                        <x-molecules.text_input_field :name="'description'" :label="'Description'" :classlabel="'form-label'"
+                        <x-molecules.text_input_field 
+                        :name="'name'" 
+                        :label="'Name'" 
+                        :classlabel="'form-label'"
                         :classinput="'form-control'" />
 
-                        <x-molecules.select_field :classlabel="'form-label'" :name="'company_id'" :label="'Company'" :options="$companies"
-                        :field="'name'" :multiple="false" />
+                        <x-molecules.text_input_field 
+                        :name="'description'" 
+                        :label="'Description'" 
+                        :classlabel="'form-label'"
+                        :classinput="'form-control'" />
 
-                        <x-molecules.select_field :classlabel="'form-label'" :name="'persons[]'" :label="'Persons'" :options="$persons"
-                        :field="'full_name'" :multiple="true" />
+                        <x-molecules.select_field 
+                        :classlabel="'form-label'" 
+                        :name="'company_id'" 
+                        :selected="''"
+                        :label="'Company'" 
+                        :options="$companies"
+                        :field="'name'" 
+                        :multiple="false" />
+
+                        <x-molecules.select_field 
+                        :classlabel="'form-label'" 
+                        :name="'persons[]'" 
+                        :selected="''"
+                        :label="'Persons'" 
+                        :options="$persons"
+                        :field="'full_name'" 
+                        :multiple="true" />
 
                         <x-atoms.button :class="'btn btn-primary '" :text="'Submit'" />
 

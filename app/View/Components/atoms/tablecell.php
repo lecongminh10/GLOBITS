@@ -8,9 +8,8 @@ use Illuminate\View\Component;
 
 class tablecell extends Component
 {
-    /**
-     * Create a new component instance.
-     */
+
+    
     public function __construct()
     {
         //

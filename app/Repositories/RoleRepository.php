@@ -15,19 +15,7 @@ class RoleRepository extends BaseRepository
         $this ->roleRepository = $roleRepository;
 
     }
-    public function createRepository(array $data)
-    {
-        $roleRepository = $this->roleRepository->create($data);
 
-        return $roleRepository;
-    }
-    public function update($id, array $data)
-    {
-        $roleRepository = $this->roleRepository->findOrFail($id);
-
-        $roleRepository->update($data);
-        return $roleRepository;
-    }
 
     public function getID_Role()
     {

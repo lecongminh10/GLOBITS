@@ -12,11 +12,17 @@
                 @csrf
                 <div class="modal-body">
 
-                    <x-molecules.text_input_field :name="'role'" :label="'Role'" :classlabel="'form-label'"
+                    <x-molecules.text_input_field 
+                    :name="'role'" 
+                    :label="'Role'" 
+                    :classlabel="'form-label'"
                     :classinput="'form-control'" />
   
     
-                    <x-molecules.text_input_field :name="'description'" :label="'Description'" :classlabel="'form-label'"
+                    <x-molecules.text_input_field 
+                    :name="'description'" 
+                    :label="'Description'" 
+                    :classlabel="'form-label'"
                     :classinput="'form-control'" />
  
 
@@ -25,7 +31,6 @@
                     <div class="hstack gap-2 justify-content-end">
 
                         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                        {{-- <button type="submit" class="btn btn-success" id="add-btn">Add Customer</button> --}}
                         <x-atoms.button :class="'btn btn-primary '" :text="'Submit'" />
           
                     </div>

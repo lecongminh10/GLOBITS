@@ -20,16 +20,16 @@
                     <h4 class="card-title mb-0">Company : {{ $nameCompany }}</h4>
                 </div>
                 @if (Session::has('success'))
-                <div class="alert alert-success">
-                    {{ Session::get('success') }}
-                </div>
+                    <div class="alert alert-success">
+                        {{ Session::get('success') }}
+                    </div>
                 @endif
                 @if (Session::has('error'))
-                <div class="alert alert-danger">
-                    {{ Session::get('error') }}
-                </div>
+                    <div class="alert alert-danger">
+                        {{ Session::get('error') }}
+                    </div>
                 @endif
-            
+
                 <div class="card-body">
                     <div class="listjs-table" id="customerList">
                         <div class="row g-4 mb-3">
@@ -56,15 +56,11 @@
                         </div>
 
                         <div class="table-responsive table-card mt-3 mb-1">
-                            <table class="table align-middle table-nowrap" id="departmentTable">
-                                
-                                {{-- sữ dụng components thead --}}
-                                @include('components.atoms.table_head', [
-                                    'idClassThead' => 'table-light',
-                                    'headers' => ['', 'STT', 'Code', 'Name', 'Action'],
-                                ])
-
-                                <tbody class="list form-check-all">
+                            <x-molecules.table :classTable="'table align-middle table-nowrap'" :idTable="'departmentTable'">
+                                <x-slot name="theah">
+                                    <x-atoms.table_head :idClassThead="'table-light'" :headers="['', 'STT', 'Code', 'Name', 'Action']" />
+                                </x-slot>
+                                <x-slot name="tbody">
                                     @foreach ($departments as $department)
                                         <tr class="parent" data-id="{{ $department->id }}">
 
@@ -95,12 +91,7 @@
                                                 </form>
                                             </td>
                                         </tr>
-                                        <!-- Duyệt qua các phòng ban con -->
                                         @php
-                                            // $parentsChild = \App\Models\Department::getAllDepartment_ID(
-                                            //     $department->id,
-                                            // );
-                                         
                                             $parentsChild = $departmentService->getAllDepartment_ID($department->id);
                                         @endphp
                                         @foreach ($parentsChild as $child)
@@ -136,24 +127,11 @@
                                             </tr>
                                         @endforeach
                                     @endforeach
-                                </tbody>
-                            </table>
-                            <div class="noresult" style="display: none">
-                                <div class="text-center">
-                                    <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop"
-                                        colors="primary:#121331,secondary:#08a88a"
-                                        style="width:75px;height:75px"></lord-icon>
-                                    <h5 class="mt-2">Sorry! No Result Found</h5>
-                                    <p class="text-muted mb-0">We've searched more than 150+ Orders We did not find any
-                                        orders for you search.</p>
-                                </div>
-                            </div>
+                                </x-slot>
+                            </x-molecules.table>
+
                         </div>
-
-                        {{-- phân trang --}}
-                        @include('components.molecules.pagination', ['paginator' => $departments])
-
-
+                        <x-molecules.pagination :paginator="$departments"/>
                     </div>
                 </div><!-- end card -->
             </div>

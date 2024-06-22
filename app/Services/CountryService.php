@@ -14,16 +14,5 @@ class CountryService extends BaseService
         $this ->countryService = $countryService;
     }
 
-    public function createCountry(array $data)
-    {
-        return $this->countryService->createRepository($data);
-    }
-
-    public function updateCompany($id, array $data)
-    {
-
-        $this->countryService->getById($id);
-        return $this->countryService->update($id, $data);
-    }
 
 }

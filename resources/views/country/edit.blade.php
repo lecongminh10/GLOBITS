@@ -20,33 +20,29 @@
               @method('PUT')
               <div class="modal-body">
   
-                  <x-molecules.text_input_field :name="'code_up'" :label="'Code'" :classlabel="'form-label'" 
+                  <x-molecules.text_input_field 
+                  :name="'code_up'" 
+                  :label="'Code'" 
+                  :classlabel="'form-label'" 
                   :classinput="'form-control'" />
 
-                  <x-molecules.text_input_field :name="'name_up'" :label="'Name'" :classlabel="'form-label'" 
+                  <x-molecules.text_input_field 
+                  :name="'name_up'" 
+                  :label="'Name'" 
+                  :classlabel="'form-label'" 
                   :classinput="'form-control'" />
 
-                  <x-molecules.text_input_field :name="'description_up'" :label="'Description'" :classlabel="'form-label'" 
+                  <x-molecules.text_input_field 
+                  :name="'description_up'" 
+                  :label="'Description'" 
+                  :classlabel="'form-label'" 
                   :classinput="'form-control'" />
-                  
-                  {{-- <div class="form-group mb-3">
-                    <label for="code" >Code</label>
-                    <input type="text" class="form-controll" id="code">
-                  </div>
-                  <div class="form-group mb-3">
-                    <label for="name">Name</label>
-                    <input type="text" class="form-controll" id="name">
-                  </div>
-                  <div class="form-group mb-3">
-                    <label for="description">Description</label>
-                    <input type="text" class="form-controll" id="description">
-                  </div> --}}
+
               </div>
               <div class="modal-footer">
                   <div class="hstack gap-2 justify-content-end">
                       <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
                       <x-atoms.button :class="'btn btn-primary '" :text="'Update'" />
-        
                   </div>
               </div>
           </form>

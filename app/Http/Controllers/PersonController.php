@@ -16,9 +16,9 @@ class PersonController extends Controller
 
     public function __construct(PersonService $personServices, UserService $userService, CompanyService $companyService)
     {
-        $this->personServices = $personServices;
-        $this->userService = $userService;
-        $this->companyService = $companyService;
+        $this->personServices  = $personServices;
+        $this->userService     = $userService;
+        $this->companyService  = $companyService;
     }
     public function index()
     {
@@ -27,7 +27,7 @@ class PersonController extends Controller
     }
     public function create()
     {
-        $user = $this->userService->getID_Name();
+        $user    = $this->userService->getID_Name();
         $company = $this->companyService->getID_Name();
 
         return view('person.create', [
@@ -39,14 +39,14 @@ class PersonController extends Controller
     public function store(PersonRequest $request)
     {
         $data = $request->all();
-        $this->personServices->createPerson($data);
+        $this->personServices->saveOrUpdate($data);
         return redirect()->route('person.index')->with('success', 'Person successful');
     }
     public function edit(string $id)
     {
-        $users = $this->userService->getID_Name();
+        $users   = $this->userService->getID_Name();
         $company = $this->companyService->getID_Name();
-        $person = $this->personServices->getById($id);
+        $person  = $this->personServices->getById($id);
 
         return view(
             'person.edit',
@@ -61,7 +61,7 @@ class PersonController extends Controller
     public function update(PersonRequest $request, string $id)
     {
         $data = $request->all();
-        $this->personServices->updatePerson($id, $data);
+        $this->personServices->saveOrUpdate($data, $id);
         return redirect()->route('person.index')->with('success', 'Update person successful');
     }
 
